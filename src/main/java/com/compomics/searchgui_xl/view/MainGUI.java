@@ -1,9 +1,16 @@
 package com.compomics.searchgui_xl.view;
 
 import com.compomics.searchgui_xl.controller.MainFrameController;
-import com.compomics.searchgui_xl.model.ConfigHolder;
+import com.compomics.searchgui_xl.model.PropertyConfig;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import org.apache.commons.configuration.ConfigurationException;
+
 /**
  *
  * @author Genet
@@ -14,15 +21,13 @@ public class MainGUI extends javax.swing.JFrame {
      * Creates new form MainGUI
      */
     MainFrameController frmController;
+
     public MainGUI(MainFrameController frmControl) {
 
-        frmController=frmControl;
-        initComponents();        
-         
-       
+        frmController = frmControl;
+        initComponents();
+
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,6 +77,24 @@ public class MainGUI extends javax.swing.JFrame {
         lblSpectrumPath.setText("Spectrum ");
 
         lblOutputFolder.setText("OutPut ");
+
+        txtDatabasePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDatabasePathActionPerformed(evt);
+            }
+        });
+
+        txtSpectrumPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSpectrumPathActionPerformed(evt);
+            }
+        });
+
+        txtOutPutFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOutPutFolderActionPerformed(evt);
+            }
+        });
 
         btnDatabasePath.setText("Browse");
         btnDatabasePath.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +297,7 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDatabasePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatabasePathActionPerformed
-        
+
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Choose database ");
         fileChooser.setMultiSelectionEnabled(false);
@@ -287,24 +310,31 @@ public class MainGUI extends javax.swing.JFrame {
             String tempfile = fileChooser.getSelectedFile().getPath();
             tempfile = tempfile.replace('\\', '/');
 
-            if (tempfile.endsWith(".fasta") || tempfile.endsWith(".FASTA") ) {
+            if (tempfile.endsWith(".fasta") || tempfile.endsWith(".FASTA")) {
                 txtDatabasePath.setText(tempfile);
+                PropertyConfig.getInstance().setProperty("database.path", tempfile);
+
             } else {
-               JOptionPane.showMessageDialog(this, "database file not supported");
+                JOptionPane.showMessageDialog(this, "database file not supported");
             }
 
         }
     }//GEN-LAST:event_btnDatabasePathActionPerformed
 
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
-        
-        //call run method from controller
-        
+
+        try {
+            frmController.startSearch();
+        } catch (ConfigurationException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_btnRunActionPerformed
 
     private void btnAdvancedSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdvancedSettingsActionPerformed
         frmController.showAdvancedSearchParams();
-        
+
     }//GEN-LAST:event_btnAdvancedSettingsActionPerformed
 
     private void btnSpectrumPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpectrumPathActionPerformed
@@ -319,16 +349,18 @@ public class MainGUI extends javax.swing.JFrame {
             String tempfile = fileChooser.getSelectedFile().getPath();
             tempfile = tempfile.replace('\\', '/');
 
-            if (tempfile.endsWith(".mgf") || tempfile.endsWith(".mzXML")|| tempfile.endsWith(".mzML")||tempfile.endsWith(".raw")) {
+            if (tempfile.endsWith(".mgf") || tempfile.endsWith(".mzXML") || tempfile.endsWith(".mzML") || tempfile.endsWith(".raw")) {
                 txtSpectrumPath.setText(tempfile);
+                PropertyConfig.getInstance().setProperty("spectra.path", tempfile);
+
             } else {
-               JOptionPane.showMessageDialog(this, "spectrum file not supported");
+                JOptionPane.showMessageDialog(this, "spectrum file not supported");
             }
         }
     }//GEN-LAST:event_btnSpectrumPathActionPerformed
 
     private void btnOutPutFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutPutFolderActionPerformed
-         JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Choose output directory");
         fileChooser.setMultiSelectionEnabled(false);
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -340,14 +372,61 @@ public class MainGUI extends javax.swing.JFrame {
             tempfile = tempfile.replace('\\', '/');
 
             txtOutPutFolder.setText(tempfile);
-            
+            PropertyConfig.getInstance().setProperty("output.path", tempfile);
+
         }
     }//GEN-LAST:event_btnOutPutFolderActionPerformed
 
     private void cmbCrossLinkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCrossLinkerActionPerformed
-        String crosslinker=cmbCrossLinker.getSelectedItem().toString();
-        ConfigHolder.getInstance().setProperty("cross.linker", crosslinker);
+
+        String crosslinker = cmbCrossLinker.getSelectedItem().toString();
+        PropertyConfig.getInstance().setProperty("cross.linker", crosslinker);
     }//GEN-LAST:event_cmbCrossLinkerActionPerformed
+
+    private void txtDatabasePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDatabasePathActionPerformed
+
+        String tempfile = txtDatabasePath.getText();
+        tempfile = tempfile.replace('\\', '/');
+
+        if (tempfile.endsWith(".mgf") || tempfile.endsWith(".mzXML") || tempfile.endsWith(".mzML") || tempfile.endsWith(".raw")) {
+            txtDatabasePath.setText(tempfile);
+            PropertyConfig.getInstance().setProperty("database.path", tempfile);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "database file type not supported");
+            txtDatabasePath.setText(PropertyConfig.getInstance().getProperty("database.path"));
+        }
+    }//GEN-LAST:event_txtDatabasePathActionPerformed
+
+    private void txtSpectrumPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSpectrumPathActionPerformed
+
+        String tempfile = txtSpectrumPath.getText();
+        tempfile = tempfile.replace('\\', '/');
+
+        if (tempfile.endsWith(".mgf") || tempfile.endsWith(".mzXML") || tempfile.endsWith(".mzML") || tempfile.endsWith(".raw")) {
+            txtSpectrumPath.setText(tempfile);
+            PropertyConfig.getInstance().setProperty("spectra.path", tempfile);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "spectrum file format not supported");
+            txtSpectrumPath.setText(PropertyConfig.getInstance().getProperty("spectra.path"));
+        }
+    }//GEN-LAST:event_txtSpectrumPathActionPerformed
+
+    private void txtOutPutFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOutPutFolderActionPerformed
+
+        String tempfile = txtOutPutFolder.getText();
+        tempfile = tempfile.replace('\\', '/');
+        File file=new File(tempfile);
+        if (file.exists() && file.isDirectory()) {           
+            txtOutPutFolder.setText(tempfile);
+            PropertyConfig.getInstance().setProperty("output.path", tempfile);
+
+        }else{
+            JOptionPane.showMessageDialog(this, "Path not found");
+            txtOutPutFolder.setText(PropertyConfig.getInstance().getProperty("output.path"));
+        }
+    }//GEN-LAST:event_txtOutPutFolderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

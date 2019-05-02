@@ -1,6 +1,6 @@
 package com.compomics.searchgui_xl.view;
 
-import com.compomics.searchgui_xl.model.ConfigHolder;
+import com.compomics.searchgui_xl.model.PropertyConfig;
 import com.compomics.searchgui_xl.controller.AdvancedSettingsFrameController;
 import javax.swing.JOptionPane;
 
@@ -538,7 +538,6 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
                 .addGroup(pnlSearchParametersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNeutralLoss)
                     .addComponent(cmbNeutralLoss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(pnlSearchParametersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlSearchParametersLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -553,7 +552,6 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
                         .addComponent(lblFragTolerance))
                     .addComponent(txtFragTolerance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbFragTolerance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(pnlSearchParametersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlSearchParametersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtMaxPepMass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -561,7 +559,6 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
                     .addGroup(pnlSearchParametersLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(lblMaxPepMass)))
-                .addGap(18, 18, 18)
                 .addGroup(pnlSearchParametersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlSearchParametersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtMinPepMass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1110,7 +1107,7 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
                         .addGroup(pnlAdvancedSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pnlLinkInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 1037, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlAdvancedSettingsLayout.setVerticalGroup(
@@ -1161,41 +1158,37 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void chkMS1CentroidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMS1CentroidActionPerformed
-        boolean chk = chkMS1Centroid.isSelected();
-        ConfigHolder.getInstance().setProperty("MS1.centroid", chk);
+        
     }//GEN-LAST:event_chkMS1CentroidActionPerformed
 
     private void chkMS2CentroidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMS2CentroidActionPerformed
-        boolean chk = chkMS2Centroid.isSelected();
-        ConfigHolder.getInstance().setProperty("MS2.centroid", chk);
+       
     }//GEN-LAST:event_chkMS2CentroidActionPerformed
 
     private void sldrFragBinOffsetStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldrFragBinOffsetStateChanged
 
         double fragBinOffset = sldrFragBinOffset.getValue() / 10.0;
         txtFragBinOffset.setText(Double.toString(fragBinOffset));
-        ConfigHolder.getInstance().setProperty("fragment.binoffset", fragBinOffset);
 
 
     }//GEN-LAST:event_sldrFragBinOffsetStateChanged
 
     private void chkPercolatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPercolatorActionPerformed
-        ConfigHolder.getInstance().setProperty("isPercolatorAsked", chkPercolator.isSelected());
+        
     }//GEN-LAST:event_chkPercolatorActionPerformed
 
     private void chkIsLabeledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkIsLabeledActionPerformed
-        ConfigHolder.getInstance().setProperty("isLabeled", chkIsLabeled.isSelected());
+       
     }//GEN-LAST:event_chkIsLabeledActionPerformed
 
     private void cmbInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbInstrumentActionPerformed
-        String instrument = cmbInstrument.getSelectedItem().toString();
-        ConfigHolder.getInstance().setProperty("instrument", instrument);
+       
     }//GEN-LAST:event_cmbInstrumentActionPerformed
 
     private void sldrEnrichmentStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldrEnrichmentStateChanged
         double enrichment = sldrEnrichment.getValue() / 10.0;
         txtEnrichment.setText(Double.toString(enrichment));
-        ConfigHolder.getInstance().setProperty("enrichment", enrichment);
+    
 
     }//GEN-LAST:event_sldrEnrichmentStateChanged
 
@@ -1205,7 +1198,7 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
     private void cmbFragmentModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFragmentModeActionPerformed
         String fragmentMode = cmbFragmentMode.getSelectedItem().toString();
-        ConfigHolder.getInstance().setProperty("fragment.mode", fragmentMode);
+        PropertyConfig.getInstance().setProperty("fragment.mode", fragmentMode);
     }//GEN-LAST:event_cmbFragmentModeActionPerformed
 
     private void txtMS1ResolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMS1ResolutionActionPerformed
@@ -1220,9 +1213,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            txtMS1Resolution.setText(Integer.toString(ConfigHolder.getInstance().getInt("MS1.resolution")));
+            txtMS1Resolution.setText(PropertyConfig.getInstance().getProperty("MS1.resolution"));
         } else {
-            ConfigHolder.getInstance().setProperty("MS1.resolution", resolution);
+            PropertyConfig.getInstance().setProperty("MS1.resolution", Integer.toString(resolution) );
         }
 
     }//GEN-LAST:event_txtMS1ResolutionActionPerformed
@@ -1238,9 +1231,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            txtMS2Resolution.setText(Integer.toString(ConfigHolder.getInstance().getInt("MS2.resolution")));
+            txtMS2Resolution.setText(PropertyConfig.getInstance().getProperty("MS2.resolution"));
         } else {
-            ConfigHolder.getInstance().setProperty("MS2.resolution", resolution);
+            PropertyConfig.getInstance().setProperty("MS2.resolution", Integer.toString(resolution));
         }
     }//GEN-LAST:event_txtMS2ResolutionActionPerformed
 
@@ -1255,16 +1248,16 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("max_miscleavages", mCleavage);
+            PropertyConfig.getInstance().setProperty("max_miscleavages", Integer.toString(mCleavage));
         } else {
-            txtMaxMissCleabage.setText(Integer.toString(ConfigHolder.getInstance().getInt("max_miscleavages")));
+            txtMaxMissCleabage.setText(PropertyConfig.getInstance().getProperty("max_miscleavages"));
         }
 
     }//GEN-LAST:event_txtMaxMissCleabageActionPerformed
 
     private void cmbEnzymeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEnzymeActionPerformed
         String enzyme = cmbEnzyme.getSelectedItem().toString();
-        ConfigHolder.getInstance().setProperty("enzyme", enzyme);
+        PropertyConfig.getInstance().setProperty("enzyme", enzyme);
     }//GEN-LAST:event_cmbEnzymeActionPerformed
 
     private void txtMassWindowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMassWindowActionPerformed
@@ -1278,9 +1271,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("mass.window", windowMass);
+            PropertyConfig.getInstance().setProperty("mass.window", Integer.toString(windowMass) );
         } else {
-            txtMassWindow.setText(Integer.toString(ConfigHolder.getInstance().getInt("mass.window")));
+            txtMassWindow.setText(PropertyConfig.getInstance().getProperty("mass.window"));
         }
     }//GEN-LAST:event_txtMassWindowActionPerformed
 
@@ -1295,9 +1288,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("minimumFiltedPeaksNumberForEachWindow", minfilteredPeaks);
+            PropertyConfig.getInstance().setProperty("minimumFiltedPeaksNumberForEachWindow", Integer.toString(minfilteredPeaks) );
         } else {
-            txtMinFilteredPeaks.setText(Integer.toString(ConfigHolder.getInstance().getInt("minimumFiltedPeaksNumberForEachWindow")));
+            txtMinFilteredPeaks.setText(PropertyConfig.getInstance().getProperty("minimumFiltedPeaksNumberForEachWindow"));
         }
     }//GEN-LAST:event_txtMinFilteredPeaksActionPerformed
 
@@ -1312,9 +1305,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("maximumFiltedPeaksNumberForEachWindow", maxfilteredPeaks);
+            PropertyConfig.getInstance().setProperty("maximumFiltedPeaksNumberForEachWindow", Integer.toString(maxfilteredPeaks) );
         } else {
-            txtMaxFilteredPeaks.setText(Integer.toString(ConfigHolder.getInstance().getInt("maximumFiltedPeaksNumberForEachWindow")));
+            txtMaxFilteredPeaks.setText(PropertyConfig.getInstance().getProperty("maximumFiltedPeaksNumberForEachWindow"));
         }
     }//GEN-LAST:event_txtMaxFilteredPeaksActionPerformed
 
@@ -1329,9 +1322,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("minPrecMassIsotopicPeakSelected", minIsotop);
+            PropertyConfig.getInstance().setProperty("minPrecMassIsotopicPeakSelected", Integer.toString(minIsotop));
         } else {
-            txtMinPrecMassIsotop.setText(Integer.toString(ConfigHolder.getInstance().getInt("minPrecMassIsotopicPeakSelected")));
+            txtMinPrecMassIsotop.setText(PropertyConfig.getInstance().getProperty("minPrecMassIsotopicPeakSelected"));
         }
     }//GEN-LAST:event_txtMinPrecMassIsotopActionPerformed
 
@@ -1346,9 +1339,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("deisotopePrecision", deIsotopPrec);
+            PropertyConfig.getInstance().setProperty("deisotopePrecision", Integer.toString(deIsotopPrec));
         } else {
-            txtDeisotopicPrecision.setText(Integer.toString(ConfigHolder.getInstance().getInt("deisotopePrecision")));
+            txtDeisotopicPrecision.setText(PropertyConfig.getInstance().getProperty("deisotopePrecision"));
         }
     }//GEN-LAST:event_txtDeisotopicPrecisionActionPerformed
 
@@ -1363,9 +1356,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("deconvulatePrecision", deConvPrecision);
+            PropertyConfig.getInstance().setProperty("deconvulatePrecision", Integer.toString(deConvPrecision));
         } else {
-            txtDeconvulatePrecision.setText(Integer.toString(ConfigHolder.getInstance().getInt("deconvulatePrecision")));
+            txtDeconvulatePrecision.setText(PropertyConfig.getInstance().getProperty("deconvulatePrecision"));
         }
     }//GEN-LAST:event_txtDeconvulatePrecisionActionPerformed
 
@@ -1380,15 +1373,15 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("fragment.binsize", fragBinSize);
+            PropertyConfig.getInstance().setProperty("fragment.binsize", Double.toString(fragBinSize));
         } else {
-            txtFragBinSize.setText(Integer.toString(ConfigHolder.getInstance().getInt("fragment.binsize")));
+            txtFragBinSize.setText(PropertyConfig.getInstance().getProperty("fragment.binsize"));
         }
     }//GEN-LAST:event_txtFragBinSizeActionPerformed
 
     private void cmbNeutralLossActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNeutralLossActionPerformed
         int neutralLoss=cmbNeutralLoss.getSelectedIndex();
-        ConfigHolder.getInstance().setProperty("neutral.losses", neutralLoss);
+        PropertyConfig.getInstance().setProperty("neutral.losses", Integer.toString(neutralLoss));
     }//GEN-LAST:event_cmbNeutralLossActionPerformed
 
     private void txtPrecToleranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecToleranceActionPerformed
@@ -1402,9 +1395,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("precursor.tolerance", precTolerance);
+            PropertyConfig.getInstance().setProperty("precursor.tolerance", Double.toString(precTolerance));
         } else {
-            txtPrecTolerance.setText(Integer.toString(ConfigHolder.getInstance().getInt("precursor.tolerance")));
+            txtPrecTolerance.setText(PropertyConfig.getInstance().getProperty("precursor.tolerance"));
         }
     }//GEN-LAST:event_txtPrecToleranceActionPerformed
 
@@ -1419,20 +1412,20 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("fragment.tolerance", fragTolerance);
+            PropertyConfig.getInstance().setProperty("fragment.tolerance", Double.toString(fragTolerance));
         } else {
-            txtFragTolerance.setText(Integer.toString(ConfigHolder.getInstance().getInt("fragment.tolerance")));
+            txtFragTolerance.setText(PropertyConfig.getInstance().getProperty("fragment.tolerance"));
         }
     }//GEN-LAST:event_txtFragToleranceActionPerformed
 
     private void cmbPrecToleranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPrecToleranceActionPerformed
        String unit=cmbPrecTolerance.getSelectedItem().toString();
-       ConfigHolder.getInstance().setProperty("precursor.toleranceUnit", unit);
+       PropertyConfig.getInstance().setProperty("precursor.toleranceUnit", unit);
     }//GEN-LAST:event_cmbPrecToleranceActionPerformed
 
     private void cmbFragToleranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFragToleranceActionPerformed
         String unit=cmbFragmentMode.getSelectedItem().toString();
-       ConfigHolder.getInstance().setProperty("fragment.toleranceUnit", unit);
+       PropertyConfig.getInstance().setProperty("fragment.toleranceUnit", unit);
     }//GEN-LAST:event_cmbFragToleranceActionPerformed
 
     private void txtMaxPepMassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaxPepMassActionPerformed
@@ -1446,9 +1439,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("max.peptide.mass", maxPepMass);
+            PropertyConfig.getInstance().setProperty("max.peptide.mass", Integer.toString(maxPepMass));
         } else {
-            txtMaxPepMass.setText(Integer.toString(ConfigHolder.getInstance().getInt("max.peptide.mass")));
+            txtMaxPepMass.setText(PropertyConfig.getInstance().getProperty("max.peptide.mass"));
         }
     }//GEN-LAST:event_txtMaxPepMassActionPerformed
 
@@ -1463,34 +1456,34 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("min.peptide.mass", minPepMass);
+            PropertyConfig.getInstance().setProperty("min.peptide.mass", Integer.toString(minPepMass));
         } else {
-            txtMinPepMass.setText(Integer.toString(ConfigHolder.getInstance().getInt("min.peptide.mass")));
+            txtMinPepMass.setText(PropertyConfig.getInstance().getProperty("min.peptide.mass"));
         }
     }//GEN-LAST:event_txtMinPepMassActionPerformed
 
     private void chkFragIonAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFragIonAActionPerformed
-        ConfigHolder.getInstance().setProperty("fragment.ionA", chkFragIonA.isSelected());
+        PropertyConfig.getInstance().setProperty("fragment.ionA", Boolean.toString(chkFragIonA.isSelected()) );
     }//GEN-LAST:event_chkFragIonAActionPerformed
 
     private void chkFragIonBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFragIonBActionPerformed
-       ConfigHolder.getInstance().setProperty("fragment.ionB", chkFragIonB.isSelected());
+       PropertyConfig.getInstance().setProperty("fragment.ionB", Boolean.toString(chkFragIonB.isSelected()) );
     }//GEN-LAST:event_chkFragIonBActionPerformed
 
     private void chkFragIonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFragIonCActionPerformed
-        ConfigHolder.getInstance().setProperty("fragment.ionC", chkFragIonC.isSelected());
+        PropertyConfig.getInstance().setProperty("fragment.ionC", Boolean.toString(chkFragIonC.isSelected()));
     }//GEN-LAST:event_chkFragIonCActionPerformed
 
     private void chkFragIonXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFragIonXActionPerformed
-       ConfigHolder.getInstance().setProperty("fragment.ionX", chkFragIonX.isSelected());
+       PropertyConfig.getInstance().setProperty("fragment.ionX", Boolean.toString(chkFragIonX.isSelected()));
     }//GEN-LAST:event_chkFragIonXActionPerformed
 
     private void chkFragIonYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFragIonYActionPerformed
-        ConfigHolder.getInstance().setProperty("fragment.ionY", chkFragIonY.isSelected());
+        PropertyConfig.getInstance().setProperty("fragment.ionY", Boolean.toString(chkFragIonY.isSelected()));
     }//GEN-LAST:event_chkFragIonYActionPerformed
 
     private void chkFragIonZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFragIonZActionPerformed
-        ConfigHolder.getInstance().setProperty("fragment.ionZ", chkFragIonZ.isSelected());
+        PropertyConfig.getInstance().setProperty("fragment.ionZ", Boolean.toString(chkFragIonZ.isSelected()));
     }//GEN-LAST:event_chkFragIonZActionPerformed
 
     private void txtMaxPepLengthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaxPepLengthActionPerformed
@@ -1504,9 +1497,9 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("maxLen.allowed", maxPepLen);
+            PropertyConfig.getInstance().setProperty("maxLen.allowed", Integer.toString(maxPepLen));
         } else {
-            txtMaxPepLength.setText(Integer.toString(ConfigHolder.getInstance().getInt("maxLen.allowed")));
+            txtMaxPepLength.setText(PropertyConfig.getInstance().getProperty("maxLen.allowed"));
         }
     }//GEN-LAST:event_txtMaxPepLengthActionPerformed
 
@@ -1521,22 +1514,22 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("minLen.allowed", minPepLen);
+            PropertyConfig.getInstance().setProperty("minLen.allowed", Integer.toString(minPepLen));
         } else {
-            txtMinPepLength.setText(Integer.toString(ConfigHolder.getInstance().getInt("minLen.allowed")));
+            txtMinPepLength.setText(PropertyConfig.getInstance().getProperty("minLen.allowed"));
         }
     }//GEN-LAST:event_txtMinPepLengthActionPerformed
 
     private void chkMonoLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMonoLinkActionPerformed
-         ConfigHolder.getInstance().setProperty("searchForAlsoMonoLink", chkMonoLink.isSelected());
+         PropertyConfig.getInstance().setProperty("searchForAlsoMonoLink", Boolean.toString(chkMonoLink.isSelected()));
     }//GEN-LAST:event_chkMonoLinkActionPerformed
 
     private void chkIntraLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkIntraLinkActionPerformed
         boolean val=chkIntraLink.isSelected();
         if(val){
-            ConfigHolder.getInstance().setProperty("crossLinkedProteinTypes", "Both" );
+            PropertyConfig.getInstance().setProperty("crossLinkedProteinTypes", "Both" );
         }else{
-            ConfigHolder.getInstance().setProperty("crossLinkedProteinTypes", "Inter" );
+            PropertyConfig.getInstance().setProperty("crossLinkedProteinTypes", "Inter" );
         }
         
     }//GEN-LAST:event_chkIntraLinkActionPerformed
@@ -1544,26 +1537,26 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
     private void chkInterLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkInterLinkActionPerformed
          boolean val=chkInterLink.isSelected();
         if(val){
-            ConfigHolder.getInstance().setProperty("crossLinkedProteinTypes", "Both" );
+            PropertyConfig.getInstance().setProperty("crossLinkedProteinTypes", "Both" );
         }else{
-            ConfigHolder.getInstance().setProperty("crossLinkedProteinTypes", "Intra" );
+            PropertyConfig.getInstance().setProperty("crossLinkedProteinTypes", "Intra" );
         }
     }//GEN-LAST:event_chkInterLinkActionPerformed
 
     private void chkSideReactionSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSideReactionSActionPerformed
-       ConfigHolder.getInstance().setProperty("consider.sideReactionSerine", chkSideReactionS.isSelected());
+       PropertyConfig.getInstance().setProperty("consider.sideReactionSerine", Boolean.toString(chkSideReactionS.isSelected()));
     }//GEN-LAST:event_chkSideReactionSActionPerformed
 
     private void chkSideReactionTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSideReactionTActionPerformed
-        ConfigHolder.getInstance().setProperty("consider.sideReactionThreonine", chkSideReactionT.isSelected());
+        PropertyConfig.getInstance().setProperty("consider.sideReactionThreonine", Boolean.toString(chkSideReactionT.isSelected()));
     }//GEN-LAST:event_chkSideReactionTActionPerformed
 
     private void chkSideReactionYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSideReactionYActionPerformed
-        ConfigHolder.getInstance().setProperty("consider.sideReactionTyrosine", chkSideReactionY.isSelected());
+        PropertyConfig.getInstance().setProperty("consider.sideReactionTyrosine", Boolean.toString(chkSideReactionY.isSelected()));
     }//GEN-LAST:event_chkSideReactionYActionPerformed
 
     private void txtPercolatorVersionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPercolatorVersionActionPerformed
-        ConfigHolder.getInstance().setProperty("percolator.version", txtPercolatorVersion.getText());
+        PropertyConfig.getInstance().setProperty("percolator.version", txtPercolatorVersion.getText());
     }//GEN-LAST:event_txtPercolatorVersionActionPerformed
 
     private void txtFDRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFDRActionPerformed
@@ -1577,18 +1570,23 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
 
         }
         if (!error) {
-            ConfigHolder.getInstance().setProperty("fdr", fdr);
+            PropertyConfig.getInstance().setProperty("fdr", Double.toString(fdr));
         } else {
-            txtFDR.setText(Integer.toString(ConfigHolder.getInstance().getInt("fdr")));
+            txtFDR.setText(PropertyConfig.getInstance().getProperty("fdr"));
         }
     }//GEN-LAST:event_txtFDRActionPerformed
 
     private void cmbisotopErrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbisotopErrorActionPerformed
-        ConfigHolder.getInstance().setProperty("isotope.error", cmbisotopError.getSelectedIndex());
+        PropertyConfig.getInstance().setProperty("isotope.error", Integer.toString(cmbisotopError.getSelectedIndex()));
     }//GEN-LAST:event_cmbisotopErrorActionPerformed
 
     private void chkTurboButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTurboButtonActionPerformed
-        ConfigHolder.getInstance().setProperty("turbo.button", chkTurboButton.isSelected());
+      int tb=0;
+      if(chkTurboButton.isSelected()){
+          tb=1;
+      }
+      
+      PropertyConfig.getInstance().setProperty("turbo.button", Integer.toString(tb) );
     }//GEN-LAST:event_chkTurboButtonActionPerformed
 
 
@@ -1672,7 +1670,7 @@ public class AdvancedSettingsFrame extends javax.swing.JFrame {
     public javax.swing.JSlider sldrFragBinOffset;
     public javax.swing.JTextField txtDeconvulatePrecision;
     public javax.swing.JTextField txtDeisotopicPrecision;
-    private javax.swing.JTextField txtEnrichment;
+    public javax.swing.JTextField txtEnrichment;
     public javax.swing.JTextField txtFDR;
     public javax.swing.JTextArea txtFixedModifications;
     public javax.swing.JTextField txtFragBinOffset;

@@ -33,6 +33,7 @@ public class ProjectMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+       
         LOG = Logger.getLogger(ProjectMain.class.getName());
         try {
             if (args.length == 0) {// GUI 

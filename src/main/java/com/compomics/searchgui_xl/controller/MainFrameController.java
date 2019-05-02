@@ -1,12 +1,12 @@
 package com.compomics.searchgui_xl.controller;
 
-import com.compomics.searchgui_xl.model.ConfigHolder;
 import com.compomics.searchgui_xl.view.*;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
+import org.apache.commons.configuration.ConfigurationException;
 
 /**
  *
@@ -14,16 +14,17 @@ import javax.swing.SwingWorker;
  */
 public class MainFrameController {
 
-    private MainGUI mainGUI;
+    public MainGUI mainGUI;
     private AdvancedSettingsFrameController advFrmController;
+    private  MapSearchSettings mps;
 
     public void init() {
+        
         mainGUI = new MainGUI(this);
         advFrmController = new AdvancedSettingsFrameController(this);
-
-        loadGeneralSettings();
+        mps = new MapSearchSettings();
+        advFrmController.loadSettings();
         showMainFrame();
-
     }
 
     /**
@@ -36,16 +37,12 @@ public class MainFrameController {
 
     }
 
-    public void loadGeneralSettings() {
-        mainGUI.txtDatabasePath.setText(ConfigHolder.getInstance().getString("database.path"));
-        mainGUI.txtSpectrumPath.setText(ConfigHolder.getInstance().getString("spectra.path"));
-        mainGUI.txtOutPutFolder.setText(ConfigHolder.getInstance().getString("output.path"));
-        mainGUI.cmbCrossLinker.setSelectedItem(ConfigHolder.getInstance().getString("cross.linker"));
-    }
-    
 
-    public void startSearch() {
-        //map settings from searchGUI to tools
+
+    public void startSearch() throws ConfigurationException {
+       
+        mps.setXilmassParameters();
+        
         //call swing worker thread to process time taking work
     }
 
@@ -62,10 +59,10 @@ public class MainFrameController {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(600, 200));
         scrollPane.getViewport().setOpaque(false);
+        
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-
         JOptionPane.showMessageDialog(mainGUI.getContentPane(), scrollPane, title, messageType);
     }
 
@@ -98,7 +95,6 @@ public class MainFrameController {
 //            LOG.info("Query spectra: " + configData.getExperimentalSpecFile().toString());
 //            LOG.info("Library: " + configData.getSpecLibraryFile().toString());
 //            LOG.info("Search started ");
-//
 //            result = dispatcher.dispatch();
             return null;
 
